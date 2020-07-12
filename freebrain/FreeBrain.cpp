@@ -13,8 +13,20 @@
 
 #define EXIT_SUCCESS 0
 
+void VersionFunction();
+
 void HelpFunction() {
-	printf("Fegeya FreeBrain\nfreebrain --b : Interprets your FreeBrain code\nfreebrain --g  <input> : Generates FreeBrain key code with input number\n");
+	printf("Fegeya FreeBrain ");
+	VersionFunction();
+	printf("freebrain --b : Interprets your FreeBrain code\nfreebrain --g  <input> : Generates FreeBrain key code with input number\n"
+		"freebrain --v : Shows FreeBrain version\n");
+}
+
+void VersionFunction() {
+	printf(FREEBRAIN_VERSION);
+	printf("-");
+	printf(FREEBRAIN_VERSION_STATE);
+	printf("\n");
 }
 
 int main(int argc, char** argv) {
@@ -36,6 +48,8 @@ int main(int argc, char** argv) {
 					int a;
 					std::cin >> a;
 					std::cout << interp.AsciiGen(a) << "\n";
+				} else if(arg == "--v" || arg == "--version") {
+					VersionFunction();
 				}
 			} else {
 				HelpFunction();
