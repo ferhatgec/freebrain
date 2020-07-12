@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
 				} else if(arg == "--g" || arg == "--gen") {
 					int a;
 					std::cin >> a;
-					std::cout << interp.AsciiGen(a);
+					std::cout << interp.AsciiGen(a) << "\n";
 				}
 			} else {
 				HelpFunction();
