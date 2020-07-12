@@ -122,75 +122,84 @@ FIntelligentpreter::FlaScriptInterpreter(std::string file) {
     	std::ifstream readfile((fsplusplus::GetCurrentWorkingDir() + "/" + file).c_str());
     	if(readfile.is_open()) {
         while (std::getline(readfile, line)) { // !->:>_^>119<^_<:
+      	if(line.length() != 0) {
+      		
+      		// !~ Single comment line in FreeBrain
+      		if(line[1] == '!~') {
+      			line.erase();
+      		}
       
-       	if(FindObject(line, "!->") == true) {
-      	 		if(FindObject(line, "!->:>_") == true) {
-							if(stringtools::GetBetweenString(line, ":>_^>", "<^_<:") != "error") {
-								std::string assign = stringtools::GetBetweenString(line, ":>_^>", "<^_<:");
-									if(assign[0] == '~') {
-										int value = EraseAllSubString(assign, "~").length();
-										printf("%c", value);
-									} else {
-										char c = assign[0];
-										std::cout << "print";
-    								printf("%c", c);
-									}
-							 }
-						}
-       	 }
+      	 	if(FindObject(line, "!->") == true) {
+      		 	if(FindObject(line, "!->:>_") == true) {
+				if(stringtools::GetBetweenString(line, ":>_^>", "<^_<:") != "error") {
+				std::string assign = stringtools::GetBetweenString(line, ":>_^>", "<^_<:");
+					if(assign[0] == '~') {
+						int value = EraseAllSubString(assign, "~").length();
+						printf("%c", value);
+					} else {
+						char c = assign[0];
+						std::cout << "print";
+    						printf("%c", c);
+					}
+				}
+			}
+       		 }
         	
-       if(FindObject(line, "[") == true) {
-        			std::string assign = stringtools::GetBetweenString(line, "[", "]");
-        			if(assign != "error") {
-        				if(FindObject(assign, "!->:>_^>") == true) {
-        						std::string btw = stringtools::GetBetweenString(assign, "^>", "<^");
-        						if(btw != "error") {
-        							if(btw == " ? ") {
-        								assign = stringtools::GetBetweenString(line, "?* (", ") *?");
-        								if(assign != "error") {
-        									int value = EraseAllSubString(assign, "~").length();
-        									if(value == 50) {
-        												assign = stringtools::GetBetweenString(line, "*? !->:>_^>(" , ")<*>");
-        												if(assign != "error") {
-        													value = EraseAllSubString(assign, "~").length();
-        													if(value == 92) {
-        														assign = stringtools::GetBetweenString(line, "<*>(", ")<^_<:");
-        														if(assign != "error") {
-        															value = EraseAllSubString(assign, "~").length();
-        															if(value == 110) {
-        																printf("\n");
-        															} else if(value == 111) {
-        																printf("add ( for assign.\n");
-        															} else {
-																				printf("value variable not equal with n\n");        															
-        															}
-        														} else if(value == 93) {
-        															printf("add ( for assign.\n");
-        														} else {
-        															printf("assign equal with error\n");
-        														}
-        													} else {
-        														printf("value variable not equal with slash (\\)\n");
-        													}
-        												}
+       		if(FindObject(line, "[") == true) {
+        		std::string assign = stringtools::GetBetweenString(line, "[", "]");
+        		if(assign != "error") {
+        			if(FindObject(assign, "!->:>_^>") == true) {
+        			std::string btw = stringtools::GetBetweenString(assign, "^>", "<^");
+        			if(btw != "error") {
+        				if(btw == " ? ") {
+        				assign = stringtools::GetBetweenString(line, "?* (", ") *?");
+        					if(assign != "error") {
+        					int value = EraseAllSubString(assign, "~").length();
+        						if(value == 50) {
+        							assign = stringtools::GetBetweenString(line, "*? !->:>_^>(" , ")<*>");
+        							if(assign != "error") {
+        								value = EraseAllSubString(assign, "~").length();
+        								if(value == 92) {
+        								assign = stringtools::GetBetweenString(line, "<*>(", ")<^_<:");
+        									if(assign != "error") {
+        									value = EraseAllSubString(assign, "~").length();
+        										if(value == 110) {
+        										printf("\n");
+        										} else if(value == 111) {
+        										printf("add ( for assign.\n");
+        										} else {
+											printf("value variable not equal with n\n");        												}
+        									} else if(value == 93) {
+        										printf("add ( for assign.\n");
+        									} else {
+        										printf("assign equal with error\n");
         									}
-        								}	
+        								} else {
+        									printf("value variable not equal with slash (\\)\n");
+        								}
+        								}
         							}
-        						}
+        						}	
+        					}
         				}
         			}
-      }
-        		
+        		}	
+      		}	
+        			
 		if(line[0] == '~') {
-			int value = EraseAllSubString(line, "~").length();
+			line = EraseAllSubString(line, "~");
+			int value = EraseAllSubString(line, " ").length();
 			std::cout << value;
 		} 
 			
 		if(line.back() == '~') {
-			int value;
-			value = -(EraseAllSubString(line, "~").length());
+			line = EraseAllSubString(line, "~");
+			int value = -(EraseAllSubString(line, " ").length());
 			std::cout << value;
 		}
+	} else {
+		
+	}
 	}
 }
 }
