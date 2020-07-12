@@ -1,0 +1,3 @@
+system("g++ ./freebrain/FreeBrain.cpp ./freebrain/Intelligentpreter.cpp -o freebr");
+system("./freebr");
+return
