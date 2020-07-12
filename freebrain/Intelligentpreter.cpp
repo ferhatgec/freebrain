@@ -208,18 +208,24 @@ FIntelligentpreter::FlaScriptInterpreter(std::string file) {
 			assign = stringtools::GetBetweenString(line, "!->:>_^>(", ")<^_<:]");
 			if(assign != "error") {
 				finish = stringtools::GetBetweenString(line, "{", "}");
-				if(finish != "error") {
-					if(finish[0] == '~') {
-						finish = EraseAllSubString(finish, "~");
-						value = EraseAllSubString(finish, " ").length();
-					} else if(finish.back() == '~') {
-						finish = EraseAllSubString(finish, "~");
-						value = -(EraseAllSubString(finish, " ").length());
-					}
-					assign = EraseAllSubString(assign, "~");
-					print = EraseAllSubString(assign, " ").length();
-					for(int v = 0; v != value; v++) {
+				assign = EraseAllSubString(assign, "~");
+				print = EraseAllSubString(assign, " ").length();
+				if(FindObject(finish, "~~") == true) {
+					while(true) {
 						printf("%c", print);
+					}
+				} else { 
+					if(finish != "error") {
+						if(finish[0] == '~') {
+							finish = EraseAllSubString(finish, "~");
+							value = EraseAllSubString(finish, " ").length();
+						} else if(finish.back() == '~') {
+							finish = EraseAllSubString(finish, "~");
+							value = -(EraseAllSubString(finish, " ").length());
+						}
+						for(int v = 0; v != value; v++) {
+							printf("%c", print);
+						}
 					}
 				}
 			}
