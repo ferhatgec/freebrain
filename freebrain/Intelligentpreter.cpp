@@ -197,6 +197,36 @@ FIntelligentpreter::FlaScriptInterpreter(std::string file) {
 			int value = -(EraseAllSubString(line, " ").length());
 			std::cout << value;
 		}
+				
+		// {~++++} This block returns 4 times.
+		// [!->:>_^>(~++++++)<^_<:] {~++++}
+		// [!->:>_^>(
+		// [!->:>_^>(~+++++++++++++++++++++++++++++++++)<^_<:] {~+++} -> Prints !!! (Exclamation mark * 3)
+		if(FindObject(line, "[!->:>_^>(") == true) {
+			int value = 0, print = 0;
+			std::string assign, finish;
+			assign = stringtools::GetBetweenString(line, "!->:>_^>(", ")<^_<:]");
+			if(assign != "error") {
+				finish = stringtools::GetBetweenString(line, "{", "}");
+				if(finish != "error") {
+					if(finish[0] == '~') {
+						finish = EraseAllSubString(finish, "~");
+						value = EraseAllSubString(finish, " ").length();
+					} else if(finish.back() == '~') {
+						finish = EraseAllSubString(finish, "~");
+						value = -(EraseAllSubString(finish, " ").length());
+					}
+					assign = EraseAllSubString(assign, "~");
+					print = EraseAllSubString(assign, " ").length();
+					for(int v = 0; v != value; v++) {
+						printf("%c", print);
+					}
+				}
+			}
+		}
+		
+		   
+		 
 	} else {
 		
 	}
