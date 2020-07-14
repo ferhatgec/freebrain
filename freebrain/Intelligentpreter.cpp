@@ -116,6 +116,23 @@ FIntelligentpreter::AsciiGen(int len) {
 	return rtr;
 }
 
+/*
+*
+**
+***
+****
+*/
+
+void PrintRetry(int retry, int code) {
+	for(int i = 1; i <= retry; ++i) {
+	        for(int j = 1; j <= i; ++j) {
+            		printf("%c", code);
+            		printf(" ");
+        }
+	printf("\n");
+    }
+}
+
 void 
 FIntelligentpreter::FlaScriptInterpreter(std::string file) {
 	std::string line;
@@ -204,7 +221,7 @@ FIntelligentpreter::FlaScriptInterpreter(std::string file) {
 		// [!->:>_^>(~+++++++++++++++++++++++++++++++++)<^_<:] {~+++} -> Prints !!! (Exclamation mark * 3)
 		if(FindObject(line, "[!->:>_^>(") == true) {
 			int value = 0, print = 0, increase_number = 0;
-			std::string assign, finish, increase;
+			std::string assign, finish, increase, sign, retry;
 			assign = stringtools::GetBetweenString(line, "!->:>_^>(", ")<^_<:]");
 			if(assign != "error") {
 				increase = stringtools::GetBetweenString(line, "*", "*");
@@ -217,6 +234,8 @@ FIntelligentpreter::FlaScriptInterpreter(std::string file) {
 						increase_number = -(EraseAllSubString(increase, " ").length());
 					}
 				}
+				retry = stringtools::GetBetweenString(line, "{^", "^}");
+				sign = stringtools::GetBetweenString(line, "|", "|");
 				finish = stringtools::GetBetweenString(line, "{", "}");
 				assign = EraseAllSubString(assign, "~");
 				print = EraseAllSubString(assign, " ").length();
@@ -229,6 +248,7 @@ FIntelligentpreter::FlaScriptInterpreter(std::string file) {
 						}
 					} else if(increase_number > 0) {
 						int incrase_ = 0;
+						
 						while(true) {
 							printf("%c", print + incrase_);
 							incrase_++;
@@ -266,8 +286,26 @@ FIntelligentpreter::FlaScriptInterpreter(std::string file) {
 								}	
 							}
 						} else {
+							bool pyr;
 							for(int v = 0; v != value; v++) {
-								printf("%c", print);
+								if(retry[0] == '~') {
+									pyr = true;
+									line = EraseAllSubString(retry, "~");
+									value = EraseAllSubString(retry, " ").length();
+									PrintRetry(value, print);
+								} else if(retry.back() == '~') {
+									pyr = true;
+									retry = EraseAllSubString(retry, "~");
+									value = EraseAllSubString(retry, " ").length();
+									PrintRetry(value, print);
+								} else {
+									if(pyr != true) {
+										printf("%c ", print);
+									}
+								}
+								if(sign == "\\n") {
+									printf("\n");
+								}
 							}
 						}
 					}
