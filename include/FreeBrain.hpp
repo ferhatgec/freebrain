@@ -11,7 +11,7 @@
 #include <iostream>
 #include "../Library/FileSystemPlusPlus.h"
 
-#define FREEBRAIN_VERSION "0.1.1"
+#define FREEBRAIN_VERSION "0.1.2"
 #define FREEBRAIN_VERSION_MAJOR "0.1"
 #define FREEBRAIN_VERSION_MINOR "1"
 

@@ -15,7 +15,7 @@
 !~ [!->:>_^>(~+)<^_<:] {~++++++} *~+*
 
 !~ Differences: This is prints:
-!~ This code isn't use ASCII(|key| + n)
+!~ This code doesn't use ASCII method directly.(|key| + n)
 !~ Note: Algorithm Method: 
 !~ x = len(|*|) + \n
 !~ Example (Algorithm Method):
@@ -24,5 +24,4 @@
 !~ *
 !~ * *
 !~ * * *
-
 [!->:>_^>(~++++++++++++++++++++++++++++++++++++++++++)<^_<:] {~+} {^~+++^} 
