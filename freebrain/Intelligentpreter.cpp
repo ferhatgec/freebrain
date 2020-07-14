@@ -203,16 +203,40 @@ FIntelligentpreter::FlaScriptInterpreter(std::string file) {
 		// [!->:>_^>(
 		// [!->:>_^>(~+++++++++++++++++++++++++++++++++)<^_<:] {~+++} -> Prints !!! (Exclamation mark * 3)
 		if(FindObject(line, "[!->:>_^>(") == true) {
-			int value = 0, print = 0;
-			std::string assign, finish;
+			int value = 0, print = 0, increase_number = 0;
+			std::string assign, finish, increase;
 			assign = stringtools::GetBetweenString(line, "!->:>_^>(", ")<^_<:]");
 			if(assign != "error") {
+				increase = stringtools::GetBetweenString(line, "*", "*");
+				if(increase != "error") {
+					if(increase[0] == '~') { 
+						increase = EraseAllSubString(increase, "~");
+						increase_number = EraseAllSubString(increase, " ").length(); 
+					} else if(increase.back() == '~') {
+						increase = EraseAllSubString(increase, "~");
+						increase_number = -(EraseAllSubString(increase, " ").length());
+					}
+				}
 				finish = stringtools::GetBetweenString(line, "{", "}");
 				assign = EraseAllSubString(assign, "~");
 				print = EraseAllSubString(assign, " ").length();
 				if(FindObject(finish, "~~") == true) {
-					while(true) {
-						printf("%c", print);
+					if(increase_number < 0) {
+						int decrase = 0;
+						while(true) {
+							printf("%c", print + decrase);
+							decrase--;
+						}
+					} else if(increase_number > 0) {
+						int incrase_ = 0;
+						while(true) {
+							printf("%c", print + incrase_);
+							incrase_++;
+						}
+					} else {
+						while(true) {
+							printf("%c", print);
+						}
 					}
 				} else { 
 					if(finish != "error") {
@@ -223,15 +247,34 @@ FIntelligentpreter::FlaScriptInterpreter(std::string file) {
 							finish = EraseAllSubString(finish, "~");
 							value = -(EraseAllSubString(finish, " ").length());
 						}
-						for(int v = 0; v != value; v++) {
-							printf("%c", print);
+						if(increase != "error") {
+							if(increase_number < 0) {
+								int decrase = 0;
+								for(int v = 0; v != value; v++) {
+									printf("%c", print + decrase);					
+									decrase--;
+								}
+							} else if(increase_number > 0) {
+								int incrase_ = 0;
+								for(int v = 0; v != value; v++) {
+									printf("%c", print + incrase_);
+									incrase_++;
+								}
+							} else {
+								for(int v = 0; v != value; v++) {
+									printf("%c", print);
+								}	
+							}
+						} else {
+							for(int v = 0; v != value; v++) {
+								printf("%c", print);
+							}
 						}
 					}
 				}
 			}
 		}
 		
-		   
 		 
 	} else {
 		
