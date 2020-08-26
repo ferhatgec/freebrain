@@ -1,3 +1,3 @@
 #!/bin/sh
 
-g++ ./freebrain/FreeBrain.cpp ./freebrain/Intelligentpreter.cpp -o freebr && ./freebr
+g++ -I./Library/ -I./include/ ./freebrain/FreeBrain.cpp ./freebrain/Intelligentpreter.cpp -o freebr && ./freebr

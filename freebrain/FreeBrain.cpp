@@ -6,10 +6,11 @@
 # */
 
 #include <iostream>
-#include "../include/Intelligentpreter.hpp"
-#include "../include/FreeBrain.hpp"
+#include <Intelligentpreter.hpp>
+#include <FreeBrain.hpp>
 
-#include "../Library/FileSystemPlusPlus.h"
+/* Library */
+#include <FileSystemPlusPlus.h>
 
 #define EXIT_SUCCESS 0
 

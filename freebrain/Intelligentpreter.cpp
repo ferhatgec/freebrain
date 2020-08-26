@@ -8,12 +8,12 @@
 #include <sstream>
 #include <fstream>
 #include <iostream>
-#include "../include/Intelligentpreter.hpp"
+#include <Intelligentpreter.hpp>
 
-// Libraries
-#include "../Library/FileSystemPlusPlus.h"
-#include "../Library/Colorized.hpp"
-#include "../Library/StringTools.h"
+/* Libraries */
+#include <FileSystemPlusPlus.h>
+#include <Colorized.hpp>
+#include <StringTools.h>
 
 #ifdef WINDOWS
 #include <direct.h>
@@ -25,17 +25,6 @@
 
 FIntelligentpreter::FIntelligentpreter() { }
 FIntelligentpreter::~FIntelligentpreter() { }
-
-int pr_check;
-int check;
-int intest;
-int load;
-std::string inp;
-std::string loadstr;
-std::string test;
-std::string alltext;
-std::string linebyline;
-
 
 // Get Between String    
 void 
